@@ -3,12 +3,12 @@
     {
       "previewLimit": 50,
       "server": "0.0.0.0",
-      "port": 5432,
+      "port": 5433,
       "driver": "PostgreSQL",
       "name": "pg-skeleton",
-      "database": "POSTGRES_PB",
+      "database": "postgres_pb",
       "username": "paybis",
-      "password": "123456"
+      "password": "paybis"
     }
   ]
 }
