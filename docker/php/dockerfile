@@ -21,7 +21,7 @@ COPY --from=mlocati/php-extension-installer:2.1.10 /usr/bin/install-php-extensio
 
 
 # Postgres
-RUN apk add --no-cache libpq-dev && docker-php-ext-install pdo_pgsql
+RUN apk add --no-cache libpq-dev && docker-php-ext-install pdo_pgsql 
 
 RUN set -o errexit -o nounset -o pipefail -o xtrace; 
 
