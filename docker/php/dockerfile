@@ -1,11 +1,9 @@
 FROM php:8.1.0-fpm-alpine
 
 
-
-
 # Install packages
-RUN apk add --no-cache curl git build-base zlib-dev oniguruma-dev autoconf bash
-RUN apk add --update linux-headers
+RUN apk add --no-cache curl git build-base zlib-dev oniguruma-dev autoconf bash 
+RUN apk add --update linux-headers  
 
 # Xdebug
 ARG INSTALL_XDEBUG=false
@@ -21,7 +19,7 @@ COPY --from=mlocati/php-extension-installer:2.1.10 /usr/bin/install-php-extensio
 
 
 # Postgres
-RUN apk add --no-cache libpq-dev && docker-php-ext-install pdo_pgsql 
+RUN apk add --no-cache libpq-dev && docker-php-ext-install pdo_pgsql bcmath 
 
 RUN set -o errexit -o nounset -o pipefail -o xtrace; 
 

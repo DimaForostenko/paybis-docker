@@ -6,6 +6,7 @@ use Doctrine\DBAL\Types\Types;
 use App\Repository\CurrencyRateRepository;
 use Doctrine\ORM\Mapping as ORM;
 use App\Validator\Constraints as Assert;
+use Doctrine\DBAL\Types\TimeImmutableType;
 use phpDocumentor\Reflection\Types\Integer;
 
 #[ORM\Entity(repositoryClass: CurrencyRateRepository::class)]
@@ -20,17 +21,35 @@ class CurrencyRate
     #[Assert\DateRequirements]
     private DateTimeImmutable $date;
 
+    #[ORM\Column(type: Types::STRING, length: 3, updatable: false)]
+    #[Assert\RateCurrencyRequirements]
+    private string $base;
+
     #[ORM\Column(type: Types::DECIMAL, precision: 16, scale: 8, updatable: false)]
    
     private string $rate;
 
-    #[ORM\Column(type: Types::STRING, length: 3, updatable: false)]
+    #[ORM\Column(type: Types::STRING, length: 6, updatable: false)]
     
     private string $currency;
+
+    // #[ORM\Column(type:TYPES::TIME_IMMUTABLE, length:2)]
+    // private $timestamp;
 
     public function getId(): int
     {
         return $this->id;
+    }
+    public function getBase(): string
+    {
+        return $this->base;
+    }
+
+    public function setBase(string $base): self
+    {
+        $this->base = $base;
+
+        return $this;
     }
     public function getRate(): string
     {
@@ -67,6 +86,7 @@ class CurrencyRate
 
         return $this;
     }
+ 
 }
 
 

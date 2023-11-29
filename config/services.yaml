@@ -22,3 +22,14 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    App\Providers\RatesProvider:
+        arguments:
+            $url: '%env(Rate_URL)%'
+            $base: '%env(base)%'
+        tags: [ 'app.rates_provider' ]
+    App\Services\RatesUpdater:
+        arguments:
+            -  app.rates_provider   
+    App\Command\CurrencyUpdateCommand:
+        tags:
+            - { name: 'console.command', command: 'currency:update' }        
